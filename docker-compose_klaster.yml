@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  Saboteurs:
+      container_name: BE_180215
+      image: beprojekt/presta:latest
+      restart: always
+      networks:
+        - admin-mysql_default
+      ports:
+        - 8021:80
+        - 8022:443
+      environment:
+        PS_INSTALL_AUTO: 0
+        PS_ERASE_DB: 0
+        DB_HOST: actina15.maas
+        DB_USER: ps
+        DB_PASSWD: ps
+        DB_NAME: ps
+        PS_DEV_MODE: 0
+        ALLOW_OVERRIDE: 1
+        PS_DOMAIN: localhost:80
+        PS_ENABLE_SSL: 1
+      deploy:
+        replicas: 1
+
+networks:
+  admin-mysql_default:
+    external:
+      name: admin-mysql_default
